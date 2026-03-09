@@ -99,4 +99,24 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+
+  public static final class IntakeOutConstants {
+    public static final int IntakeOut_MOTOR_ID = 12;
+    public static final int IntakeOut_MOTOR_CURRENT_LIMIT = 20;
+    public static final double IntakeOut_MOTOR_VOLTAGE_COMP = 10;
+    public static final double IntakeOut_Down = .27;
+    public static final double IntakeOut_UP = 0.8;
+  }
+
+public static final class ShooterConstants {
+  public static final int Shooter_MOTOR_ID = 12;
+  public static final int Shooter_MOTOR_CURRENT_LIMIT = 60;
+  public static final double Shooter_MOTOR_VOLTAGE_COMP = 10;
+  public static final double Shooter_SPEED_DOWN = -0.5;
+  public static final double Shooter_SPEED_UP = 0.5;
+  public static final double Shooter_HOLD_DOWN = -0.1;
+  public static final double Shooter_HOLD_UP = 0.13;
 }
+
+  }
+

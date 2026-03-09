@@ -18,32 +18,38 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-import static frc.robot.Constants.FuelConstants.*;
-
+@SuppressWarnings("unused")
 public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax LeftIntakeLauncher;
+      private static final int LEFT_INTAKE_LAUNCHER_MOTOR_ID = 0;
   private final SparkMax RightIntakeLauncher;
+      private static final int RIGHT_INTAKE_LAUNCHER_MOTOR_ID = 0; 
   private final SparkMax Indexer;
-
-  /** Creates a new CANBallSubsystem. */
-  public CANFuelSubsystem() {
-    // create brushed motors for each of the motors on the launcher mechanism
-    LeftIntakeLauncher = new SparkMax(LEFT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
-    RightIntakeLauncher = new SparkMax(RIGHT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
-    Indexer = new SparkMax(INDEXER_MOTOR_ID, MotorType.kBrushed);
-
-    // create the configuration for the feeder roller, set a current limit and apply
-    // the config to the controller
-    SparkMaxConfig feederConfig = new SparkMaxConfig();
-    feederConfig.smartCurrentLimit(INDEXER_MOTOR_CURRENT_LIMIT);
-    Indexer.configure(feederConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-    // create the configuration for the launcher roller, set a current limit, set
-    // the motor to inverted so that positive values are used for both intaking and
-    // launching, and apply the config to the controller
-    SparkMaxConfig launcherConfig = new SparkMaxConfig();
-
-    launcherConfig.smartCurrentLimit(LAUNCHER_MOTOR_CURRENT_LIMIT);
+    private int LAUNCHER_MOTOR_CURRENT_LIMIT;
+        private static final int INDEXER_INTAKING_PERCENT = 0;
+        private static final int INDEXER_LAUNCHING_PERCENT = 0;
+        private static final int INDEXER_MOTOR_CURRENT_LIMIT = 0;
+        private static final int INDEXER_MOTOR_ID = 0;
+  
+    // Creates a new CANBallSubsystem.
+    public CANFuelSubsystem() {
+          // create brushed motors for each of the motors on the launcher mechanism
+          LeftIntakeLauncher = new SparkMax(LEFT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
+          RightIntakeLauncher = new SparkMax(RIGHT_INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushless);
+      Indexer = new SparkMax(INDEXER_MOTOR_ID, MotorType.kBrushless);
+  
+      // create the configuration for the feeder roller, set a current limit and apply
+      // the config to the controller
+      SparkMaxConfig feederConfig = new SparkMaxConfig();
+      feederConfig.smartCurrentLimit(INDEXER_MOTOR_CURRENT_LIMIT);
+      Indexer.configure(feederConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  
+      // create the configuration for the launcher roller, set a current limit, set
+      // the motor to inverted so that positive values are used for both intaking and
+      // launching, and apply the config to the controller
+      SparkMaxConfig launcherConfig = new SparkMaxConfig();
+  
+      launcherConfig.smartCurrentLimit(LAUNCHER_MOTOR_CURRENT_LIMIT);
     launcherConfig.voltageCompensation(12);
     launcherConfig.idleMode(IdleMode.kCoast);
     RightIntakeLauncher.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -55,9 +61,9 @@ public class CANFuelSubsystem extends SubsystemBase {
     // you to tune the values easily, and then replace the values in Constants.java
     // with your new values. For more information, see the Software Guide.
     SmartDashboard.putNumber("Intaking feeder roller value", INDEXER_INTAKING_PERCENT);
-    SmartDashboard.putNumber("Intaking intake roller value", INTAKE_INTAKING_PERCENT);
+    SmartDashboard.putNumber("Intaking intake roller value", LEFT_INTAKE_LAUNCHER_MOTOR_ID);
     SmartDashboard.putNumber("Launching feeder roller value", INDEXER_LAUNCHING_PERCENT);
-    SmartDashboard.putNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_PERCENT);
+    SmartDashboard.putNumber("Launching launcher roller value", RIGHT_INTAKE_LAUNCHER_MOTOR_ID);
     //SmartDashboard.putNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE);
   }
 
