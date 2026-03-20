@@ -1,3 +1,4 @@
+/* 
 package frc.robot.subsystems;
 
 
@@ -60,9 +61,9 @@ public class LedSubsystem extends SubsystemBase {
          m_solidBrown.blink(Second.of(1.0), Second.of(0.5));
 
 
-    /**
-     * This subsytem that controls the LEDs.
-     */
+    
+     //This subsytem that controls the LEDs.
+     
     private LedSubsystem () {
 
         m_leds = new AddressableLED(9);
@@ -91,11 +92,11 @@ public class LedSubsystem extends SubsystemBase {
 
     }
 
-    /**
-     *  Method placeholder
-     */
+
+     //Method placeholder
     public void doNothing() {
 
     }
 
 }
+    */

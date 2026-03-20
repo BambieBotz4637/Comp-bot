@@ -2,45 +2,41 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/*
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CANFuelSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+/// A command to take fuel into the robot.
 public class IntakeInCommand extends Command {
-  private static final double INTAKE_INTAKING_PERCENT = 0;
-    private static final double INDEXER_INTAKING_PERCENT = 0;
-      /** Creates a new Intake. */
-    
-      CANFuelSubsystem fuelSubsystem;
-    
-      public IntakeInCommand(CANFuelSubsystem fuelSystem) {
-        addRequirements(fuelSystem);
-        this.fuelSubsystem = fuelSystem;
-      }
-    
-      // Called when the command is initially scheduled. Set the rollers to the
-      // appropriate values for intaking
-      @Override
-      public void initialize() {
-        fuelSubsystem
-            .setIntakeLauncherRoller(SmartDashboard.getNumber("Intaking intake roller value", INTAKE_INTAKING_PERCENT));
-      fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("Intaking feeder roller value", INDEXER_INTAKING_PERCENT));
+  private final IntakeSubsystem m_rin;
+
+
+  //Rolls fuel into the intake.
+  
+  // @param roller The subsystem used by this command.
+  public IntakeInCommand(IntakeSubsystem intake) {
+    m_rin = intake;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
-  // Called every time the scheduler runs while the command is scheduled. This
-  // command doesn't require updating any values while running
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_rin.runIntake(IntakeConstants.INTAKE_HOLD_IN);
   }
 
-  // Called once the command ends or is interrupted. Stop the rollers
+  // Called once the command ends or is interrupted. This ensures the roller is not running when not intented.
   @Override
   public void end(boolean interrupted) {
-    fuelSubsystem.setIntakeLauncherRoller(0);
-    fuelSubsystem.setFeederRoller(0);
+    m_rin.runIntake(0);
   }
 
   // Returns true when the command should end.
@@ -49,3 +45,4 @@ public class IntakeInCommand extends Command {
     return false;
   }
 }
+*/

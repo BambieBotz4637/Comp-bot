@@ -25,7 +25,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
+    public static final double kMaxSpeedMetersPerSecond = 4.0;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     // Chassis configuration
@@ -100,22 +100,50 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
   }
 
-  public static final class IntakeOutConstants {
-    public static final int IntakeOut_MOTOR_ID = 12;
-    public static final int IntakeOut_MOTOR_CURRENT_LIMIT = 20;
-    public static final double IntakeOut_MOTOR_VOLTAGE_COMP = 10;
-    public static final double IntakeOut_Down = .27;
-    public static final double IntakeOut_UP = 0.8;
+  public static final class IntakeConstants {
+    public static final int INTAKE_MOTOR_ID = 12;
+    public static final int INTAKE_MOTOR_CURRENT_LIMIT = 60;
+    public static final double INTAKE_MOTOR_VOLTAGE_COMP = 10;
+    public static final double INTAKE_SPEED_DOWN = -0.1;
+    public static final double INTAKE_SPEED_UP = 0.1;
+    public static final double INTAKE_HOLD_OUT = -0.5;
+    public static final double INTAKE_HOLD_IN = 0.5;
   }
 
+  public static final class IntakeLiftConstants {
+    public static final int INTAKE_LIFT_MOTOR_ID = 2;
+    public static final int INTAKE_LIFT_MOTOR_CURRENT_LIMIT = 40;
+    public static final double INTAKE_LIFT_MOTOR_VOLTAGE_COMP = 10;
+    public static final double LIFT_HOLD_UP = 0.1;
+    public static final double LIFT_HOLD_DOWN = -0.1;
+    public static final double LIFT_SPEED_UP = 0.5;
+    public static final double LIFT_SPEED_DOWN = -0.5;
+  }
+  
 public static final class ShooterConstants {
-  public static final int Shooter_MOTOR_ID = 12;
+  public static final int Shooter_MOTOR_ID = 17;
   public static final int Shooter_MOTOR_CURRENT_LIMIT = 60;
   public static final double Shooter_MOTOR_VOLTAGE_COMP = 10;
   public static final double Shooter_SPEED_DOWN = -0.5;
   public static final double Shooter_SPEED_UP = 0.5;
   public static final double Shooter_HOLD_DOWN = -0.1;
   public static final double Shooter_HOLD_UP = 0.13;
+  public static final double SHOOTER_SPEED = 0.5;
+}
+
+public static final class TransitionConstants {
+  public static final int TRANSITION_MOTOR_ID = 3;
+  public static final int TRANSITION_MOTOR_CURRENT_LIMIT = 60;
+  public static final double TRANSITION_MOTOR_VOLTAGE_COMP = 10;
+  public static final double TRANSITION_SPEED_FORWARD = 1.0;
+  public static final double TRANSITION_HOLD = 0.5;
+  public static final double TRANSITION_SPEED_DOWN = -1.0;
+  public static final double TRANSITION_SPEED_UP = 1.0; 
+}
+
+public static final class OperatorConstants {
+    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int OPERATOR_CONTROLLER_PORT = 1;
 }
 
   }

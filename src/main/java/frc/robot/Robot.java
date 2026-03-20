@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -88,7 +89,16 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+   /* 
+   double xSpeed = MathUtil.applyDeadband(
+      -driveController.getLeftY(),kDriveDeadband);
+    double ySpeed = MathUtil.applyDeadband (
+      -driveController.geyLeftX(),kDriveDeadband);
+    double rot = MathUtil.applyDeadband (
+      -driverController.getRightX(),kDriveDeadband);
+      */
+  }
 
   @Override
   public void testInit() {

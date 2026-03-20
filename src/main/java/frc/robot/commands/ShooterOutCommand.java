@@ -2,52 +2,47 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/*
 package frc.robot.commands;
 
-import java.util.function.BooleanSupplier;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
-/** An example command that uses an example subsystem. */
+// A ShooterOutCommand that uses a roller subsystem.
 public class ShooterOutCommand extends Command {
-  @SuppressWarnings("PMD.UnusedPrivateField")
-  private final Shooter shooter;
-  private final Intake intake;
-  private final BooleanSupplier finished;
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param Shooter The subsystem used by this command.
-   */
-  public ShooterOutCommand(frc.robot.commands.Shooter shooter, BooleanSupplier finished, Intake intake) {
-    this.shooter = shooter;
-    this.finished = finished;
-    this.intake = intake;
+  private final ShooterSubsystem m_sout;
+
+   //@param shoots The subsystem used by this command.
+  
+  public ShooterOutCommand(ShooterSubsystem shoots) {
+    m_sout = shoots;
+    addRequirements(shoots);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.intakeFuel();
-    shooter.shootFuel();
-    SmartDashboard.putBoolean("Shooter Active: ", true);
+    m_sout.runShoots(ShooterConstants.SHOOTER_SPEED);
   }
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return finished.getAsBoolean();
-  }
-  // Called once the command ends or is interrupted.
+
+  // Called once the command ends or is interrupted. Ensures the roller
+  // is not running after we let go of the button. 
   @Override
   public void end(boolean interrupted) {
-    shooter.stopShooter();
-    intake.stopIntake();
-    SmartDashboard.putBoolean("Shooter Active: ", false);
+    m_sout.runShoots(0.5);
   }
+
+  // Returns true when the command should end.
+// Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+
 }
+*/

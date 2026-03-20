@@ -16,9 +16,16 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj. GenericHID;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IntakeLiftSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TransitionSubsystem;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -32,6 +39,16 @@ import java.util.List;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+    // The robot's subsystems
+    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+    private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+    private final IntakeLiftSubsystem m_intakeLiftSubsystem = new IntakeLiftSubsystem();
+    private final TransitionSubsystem m_TransitionSubsystem = new TransitionSubsystem();
+
+    // Operators Controllers (we are using the F310, but you can use any other controller if you prefer)
+    private final CommandXboxController m_operatorController = new CommandXboxController(1);
+
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
@@ -51,12 +68,14 @@ public class RobotContainer {
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(m_driverController.getRawAxis(0), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getRawAxis(1), OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getRawAxis(0), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(m_driverController.getRawAxis(4), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getRawAxis(5), OIConstants.kDriveDeadband),
                 true),
             m_robotDrive));
+
+            //SmartDashboard.putData(m_chooser);
+
   }
 
   /**
@@ -69,6 +88,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+
     new JoystickButton(m_driverController, 6)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
@@ -78,6 +98,34 @@ public class RobotContainer {
         .onTrue(new InstantCommand(
             () -> m_robotDrive.zeroHeading(),
             m_robotDrive));
+        
+        // Shooter
+        m_operatorController.rightBumper().whileTrue(new RunCommand(
+            () -> m_shooterSubsystem.shoot(1.0), m_shooterSubsystem));
+
+        m_operatorController.rightBumper().whileTrue(new RunCommand(
+            () -> m_shooterSubsystem.stop(), m_shooterSubsystem));
+
+        // Transition
+        m_operatorController.x().whileTrue(new RunCommand(
+            () -> m_TransitionSubsystem.forward(1.0), m_TransitionSubsystem));   
+
+        m_operatorController.x().whileFalse(new RunCommand(
+            () -> m_TransitionSubsystem.forward(0), m_TransitionSubsystem));   
+
+        // Intake
+        m_operatorController.leftBumper().whileTrue(new RunCommand(
+           () -> m_intakeSubsystem.runIntake(0.5), m_intakeSubsystem));
+
+        m_operatorController.leftTrigger().whileTrue(new RunCommand(
+            () -> m_intakeSubsystem.stopIntake(), m_intakeSubsystem));
+
+       // IntakeLift
+        m_operatorController.y().whileTrue(new RunCommand(
+            () -> {}, m_intakeLiftSubsystem));
+    
+        m_operatorController.y().whileFalse(new RunCommand(
+            () -> {}, m_intakeLiftSubsystem));
   }
 
   /**
@@ -123,6 +171,11 @@ public class RobotContainer {
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, 0, true)); 
+    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true)); 
     }
+
+    /*
+     * balh blah blagh LOOK AT THIS LATER IM OGINGISNAE
+     */
+  //  m_operatorController.rightFollower().whileTrue(new IntakeDown)
 }
