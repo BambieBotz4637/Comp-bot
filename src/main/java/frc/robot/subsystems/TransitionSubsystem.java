@@ -19,7 +19,7 @@ public class TransitionSubsystem extends SubsystemBase {
     }   
     */ 
 
-    public void stop() {
+    public void forwardstop() {
         transitionMotor.set(0);
     }   
 }

@@ -112,7 +112,7 @@ public final class Constants {
 
   public static final class IntakeLiftConstants {
     public static final int INTAKE_LIFT_MOTOR_ID = 2;
-    public static final int INTAKE_LIFT_MOTOR_CURRENT_LIMIT = 40;
+    public static final int INTAKE_LIFT_MOTOR_CURRENT_LIMIT = 60;
     public static final double INTAKE_LIFT_MOTOR_VOLTAGE_COMP = 10;
     public static final double LIFT_HOLD_UP = 0.1;
     public static final double LIFT_HOLD_DOWN = -0.1;

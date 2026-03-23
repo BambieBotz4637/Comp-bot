@@ -101,31 +101,31 @@ public class RobotContainer {
         
         // Shooter
         m_operatorController.rightBumper().whileTrue(new RunCommand(
-            () -> m_shooterSubsystem.shoot(1.0), m_shooterSubsystem));
+            () -> m_shooterSubsystem.shoot(0.5), m_shooterSubsystem));
 
         m_operatorController.rightBumper().whileTrue(new RunCommand(
             () -> m_shooterSubsystem.stop(), m_shooterSubsystem));
 
         // Transition
         m_operatorController.x().whileTrue(new RunCommand(
-            () -> m_TransitionSubsystem.forward(1.0), m_TransitionSubsystem));   
+            () -> m_TransitionSubsystem.forward(0.5), m_TransitionSubsystem));   
 
         m_operatorController.x().whileFalse(new RunCommand(
-            () -> m_TransitionSubsystem.forward(0), m_TransitionSubsystem));   
+            () -> m_TransitionSubsystem.forwardstop(), m_TransitionSubsystem));   
 
         // Intake
         m_operatorController.leftBumper().whileTrue(new RunCommand(
            () -> m_intakeSubsystem.runIntake(0.5), m_intakeSubsystem));
 
-        m_operatorController.leftTrigger().whileTrue(new RunCommand(
+        m_operatorController.leftBumper().whileTrue(new RunCommand(
             () -> m_intakeSubsystem.stopIntake(), m_intakeSubsystem));
 
        // IntakeLift
         m_operatorController.y().whileTrue(new RunCommand(
-            () -> {}, m_intakeLiftSubsystem));
+            () -> m_intakeLiftSubsystem.runArm(0.5), m_intakeLiftSubsystem));
     
-        m_operatorController.y().whileFalse(new RunCommand(
-            () -> {}, m_intakeLiftSubsystem));
+        m_operatorController.y().whileFalse(new InstantCommand(
+            () -> m_intakeLiftSubsystem.stopArm(), m_intakeLiftSubsystem));
   }
 
   /**
