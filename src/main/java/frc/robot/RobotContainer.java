@@ -39,18 +39,16 @@ import java.util.List;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
-    // The robot's subsystems
-    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-    private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-    private final IntakeLiftSubsystem m_intakeLiftSubsystem = new IntakeLiftSubsystem();
-    private final TransitionSubsystem m_TransitionSubsystem = new TransitionSubsystem();
-
+   
     // Operators Controllers (we are using the F310, but you can use any other controller if you prefer)
     private final CommandXboxController m_operatorController = new CommandXboxController(1);
 
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  private final IntakeLiftSubsystem m_intakeLiftSubsystem = new IntakeLiftSubsystem();
+  private final TransitionSubsystem m_TransitionSubsystem = new TransitionSubsystem();
 
   // The driver's controller
    GenericHID m_driverController = new  GenericHID(OIConstants.kDriverControllerPort);
@@ -174,8 +172,26 @@ public class RobotContainer {
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true)); 
     }
 
-    /*
-     * balh blah blagh LOOK AT THIS LATER IM OGINGISNAE
-     */
-  //  m_operatorController.rightFollower().whileTrue(new IntakeDown)
+    /* 
+public Command getAutonomousCommand() {
+return new AutoShootCommand(shooter, transition);
+}
+
+@Override
+public void autonomousInit() {
+autonomousCommand = robotContainer.getAutonomousCommand();
+
+if (autonomousCommand != null) {
+autonomousCommand.schedule();
+}
+}
+
+@Override
+public void teleopInit() {
+if (autonomousCommand != null) {
+autonomousCommand.cancel();
+}
+
+  }
+*/
 }
