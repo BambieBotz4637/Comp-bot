@@ -42,11 +42,19 @@ public class IntakeLiftSubsystem extends SubsystemBase {
      * 
      * @param speed motor speed from -1.0 to 1, with 0 stopping it
      */
-    public void runArm(double speed){
+    public void runArmUp(double speed){
         liftMotor.set(speed);
     }
     
-    public void stopArm() {
+    public void stopArmUp() {
+        liftMotor.set(0);
+    }
+
+    public void runArmDown(double speed){
+        liftMotor.set(speed);
+    }
+
+    public void stopArmDown(){
         liftMotor.set(0);
     }
 }

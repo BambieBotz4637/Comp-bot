@@ -101,7 +101,7 @@ public class RobotContainer {
         m_operatorController.rightBumper().whileTrue(new RunCommand(
             () -> m_shooterSubsystem.shoot(0.5), m_shooterSubsystem));
 
-        m_operatorController.rightBumper().whileTrue(new RunCommand(
+        m_operatorController.rightTrigger().whileTrue(new RunCommand(
             () -> m_shooterSubsystem.stop(), m_shooterSubsystem));
 
         // Transition
@@ -115,15 +115,22 @@ public class RobotContainer {
         m_operatorController.leftBumper().whileTrue(new RunCommand(
            () -> m_intakeSubsystem.runIntake(0.5), m_intakeSubsystem));
 
-        m_operatorController.leftBumper().whileTrue(new RunCommand(
+        m_operatorController.leftTrigger().whileTrue(new RunCommand(
             () -> m_intakeSubsystem.stopIntake(), m_intakeSubsystem));
 
-       // IntakeLift
+       // IntakeLift Up
         m_operatorController.y().whileTrue(new RunCommand(
-            () -> m_intakeLiftSubsystem.runArm(0.5), m_intakeLiftSubsystem));
+            () -> m_intakeLiftSubsystem.runArmUp(0.5), m_intakeLiftSubsystem));
     
-        m_operatorController.y().whileFalse(new InstantCommand(
-            () -> m_intakeLiftSubsystem.stopArm(), m_intakeLiftSubsystem));
+        m_operatorController.y().whileFalse(new RunCommand(
+            () -> m_intakeLiftSubsystem.stopArmUp(), m_intakeLiftSubsystem));
+
+        // IntakeLift Down
+        m_operatorController.a().whileTrue(new RunCommand(
+            () -> m_intakeLiftSubsystem.runArmDown(0.5), m_intakeLiftSubsystem));
+
+        m_operatorController.a().whileFalse(new RunCommand(
+            () -> m_intakeLiftSubsystem.stopArmDown(), m_intakeLiftSubsystem));
   }
 
   /**
@@ -173,7 +180,6 @@ public class RobotContainer {
     }
 
     /* 
-public Command getAutonomousCommand() {
 return new AutoShootCommand(shooter, transition);
 }
 
